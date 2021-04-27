@@ -102,6 +102,7 @@ app.get('/weightunit/:weight_unit_id', (req, res) => {
 })
 
 app.post('/add', (req, res) => {
+    res.send("Hello World")
     const name_th = req.body.name_th;
     const name_en = req.body.name_en;
     const foodGroupId = req.body.foodGroupId;
