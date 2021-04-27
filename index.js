@@ -3,11 +3,11 @@ var app = express();
 var mysql = require('mysql');
 var cors = require('cors');
 var host = process.env.HOST || '0.0.0.0';
-var port = process.env.PORT || 8080
+var port = process.env.PORT || 8080;
 
 
-app.use(cors())
-app.use(express.json())
+app.use(cors());
+app.use(express.json());
 
 // app.use(function (req, res, next) {
 //     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -18,10 +18,10 @@ app.use(express.json())
 // });
 
 app.use((req, res, next) => {
-    res.append("Access-Control-Allow-Origin", "*");
-    res.append("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, PATCH, OPTIONS");
-    res.append("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.append("Access-Control-Allow-Credentials", true); 
+    res.append('Access-Control-Allow-Origin', '*');
+    res.append('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, PATCH, OPTIONS');
+    res.append('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.append('Access-Control-Allow-Credentials', true); 
     next();
 });
 
