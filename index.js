@@ -5,15 +5,18 @@ var cors = require('cors');
 var host = process.env.HOST || '0.0.0.0';
 var port = process.env.PORT || 8080
 
-const corsOptions ={
-    origin:'http://localhost:3000', 
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200
-}
-app.use(cors(corsOptions));
 
-// app.use(cors());
-app.use(express.json());
+app.use(cors())
+app.use(express.json())
+
+app.use(function (req, res, next) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.setHeader("Access-Control-Allow-Credentials", true); 
+    next();
+});
+
 
 const db = mysql.createConnection({
     host: "foodch.kaseamsanth.tk",
@@ -35,14 +38,6 @@ const db = mysql.createConnection({
 //     res.header('Access-Control-Allow-Credentials', true); 
 //     next();
 // });
-
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Credentials", true); 
-    next();
-});
 
 app.get('/', (req, res) => {
     res.send("Hello World")
