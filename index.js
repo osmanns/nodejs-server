@@ -20,6 +20,12 @@ const db = mysql.createConnection({
     // database: "fooddb",
 })
 
+app.get('/', function(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true); 
+});
 
 app.get('/product', (req, res) => {
     db.query("SELECT * FROM product_100", (err, result) => {
@@ -110,16 +116,12 @@ app.post('/add', (req, res) => {
     const vitaminB2 = req.body.vitaminB2;
     const iron = req.body.iron;
 
-
     db.query(
         // "INSERT INTO product100 (name_th, name_en, foodGroupId, foodGroupsubId, packageUnitId, packageServingsizeId, quantity, energy, eneryFat, fat, saturatedFat, cholesterol, protein, carbohydrates, sugar, dietaryFibar, sodium, calcium, vitaminA, vitaminB1, vitaminB2,  iron) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", 
         // [name_th, name_en, foodGroupId, foodGroupsubId, packageUnitId, packageServingsizeId, quantity, energy, energyFat, fat, saturatedFat, cholesterol, protein, carbohydrates, sugar, dietaryFibar, sodium, calcium, vitaminA, vitaminB1, vitaminB2, iron],
-
         "INSERT INTO product100 (name_th, name_en) VALUES (?, ?)", 
         [name_th, name_en],
 
-
-        
     (err, result) => {
         if(err) {
             consol.log("ERRRRRRRRRRRRROR")
@@ -130,7 +132,6 @@ app.post('/add', (req, res) => {
     }
     );
 })
-
 
 app.listen(port, () => {
     console.log(`Server is running on port . ${port}`)
