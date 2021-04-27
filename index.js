@@ -9,14 +9,21 @@ var port = process.env.PORT || 8080
 app.use(cors())
 app.use(express.json())
 
-app.use(function (req, res, next) {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS");
-    res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.setHeader("Access-Control-Allow-Credentials", true); 
+// app.use(function (req, res, next) {
+//     res.setHeader("Access-Control-Allow-Origin", "*");
+//     res.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS");
+//     res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     res.setHeader("Access-Control-Allow-Credentials", true); 
+//     next();
+// });
+
+app.use((req, res, next) => {
+    res.append('Access-Control-Allow-Origin', "*");
+    res.append('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, PATCH, OPTIONS');
+    res.append('Access-Control-Allow-Headers', 'Content-Type');
+    res.append("Access-Control-Allow-Credentials", true); 
     next();
 });
-
 
 const db = mysql.createConnection({
     host: "foodch.kaseamsanth.tk",
