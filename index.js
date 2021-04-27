@@ -1,11 +1,18 @@
-const express = require('express');
-const app = express();
-const mysql = require('mysql');
-const cors = require('cors');
+var express = require('express');
+var app = express();
+var mysql = require('mysql');
+var cors = require('cors');
 var host = process.env.HOST || '0.0.0.0';
 var port = process.env.PORT || 8080
 
-app.use(cors());
+const corsOptions ={
+    origin:'http://localhost:3000', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
+
+// app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
@@ -31,8 +38,9 @@ const db = mysql.createConnection({
 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header('Access-Control-Allow-Methods', "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    res.header("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Credentials", true); 
     next();
 });
 
