@@ -8,23 +8,6 @@ var port = process.env.PORT || 8080
 app.use(cors());
 app.use(express.json());
 
-app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
-    res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-type');
-    res.header('Access-Control-Allow-Credentials', true); 
-    next();
-});
-
-var cors_proxy = require('cors-anywhere');
-cors_proxy.createServer({
-    originWhitelist: [], // Allow all origins
-    requireHeader: ['origin', 'x-requested-with'],
-    removeHeaders: ['cookie', 'cookie2']
-}).listen(port, host, function() {
-    console.log('Running CORS Anywhere on ' + host + ':' + port);
-});
-
 const db = mysql.createConnection({
     host: "foodch.kaseamsanth.tk",
     user: "plan",
@@ -38,13 +21,21 @@ const db = mysql.createConnection({
     // database: "fooddb",
 })
 
-
-
-// app.use(function (req, res, next) {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+// app.use(function(req, res, next) {
+//     res.header('Access-Control-Allow-Origin', '*');
+//     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
+//     res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-type');
+//     res.header('Access-Control-Allow-Credentials', true); 
 //     next();
 // });
+
+
+app.use(function (req, res, next) {
+    next();
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+});
 
 app.get('/product', (req, res) => {
     db.query("SELECT * FROM product_100", (err, result) => {
