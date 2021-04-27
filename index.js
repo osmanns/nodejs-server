@@ -5,7 +5,22 @@ const cors = require('cors');
 var host = process.env.HOST || '0.0.0.0';
 var port = process.env.PORT || 8080
 
-app.use(cors());
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'https://foodchoiceserver.herokuapp.com');
+    res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.header('Access-Control-Allow-Credentials', true); 
+    next();
+});
+
+const corsOptions ={
+    origin: 'https://foodchoiceserver.herokuapp.com', 
+    credentials: true,            //access-control-allow-credentials:true
+    optionSuccessStatus: 200
+}
+app.use(cors(corsOptions));
+
+// app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
@@ -21,6 +36,8 @@ const db = mysql.createConnection({
     // database: "fooddb",
 })
 
+
+
 // app.use(function(req, res, next) {
 //     res.header('Access-Control-Allow-Origin', '*');
 //     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
@@ -29,13 +46,6 @@ const db = mysql.createConnection({
 //     next();
 // });
 
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, PATCH, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    res.header('Access-Control-Allow-Credentials', true); 
-    next();
-});
 
 // app.use(function (req, res, next) {
 //     res.header("Access-Control-Allow-Origin", "*");
