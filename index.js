@@ -5,13 +5,13 @@ const cors = require('cors');
 var host = process.env.HOST || '0.0.0.0';
 var port = process.env.PORT || 8080
 
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://foodchoiceserver.herokuapp.com');
-    res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    res.header('Access-Control-Allow-Credentials', true); 
-    next();
-});
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', 'https://foodchoiceserver.herokuapp.com');
+//     res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
+//     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//     res.header('Access-Control-Allow-Credentials', true); 
+//     next();
+// });
 
 const corsOptions ={
     origin: 'https://foodchoiceserver.herokuapp.com', 
