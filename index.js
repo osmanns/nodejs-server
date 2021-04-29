@@ -20,7 +20,7 @@ var port = process.env.PORT || 8080
 // }
 // app.use(cors(corsOptions));
 
-app.use(cors(), function(req, res, next) {
+app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
   res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -31,11 +31,11 @@ app.use(cors(), function(req, res, next) {
 app.use(cors());
 app.use(express.json());
 
-app.use(function(req, res, next) {  
-    res.header('Access-Control-Allow-Origin', req.headers.origin);
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});  
+// app.use(function(req, res, next) {  
+//     res.header('Access-Control-Allow-Origin', req.headers.origin);
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     next();
+// });  
 
 const db = mysql.createConnection({
     host: "foodch.kaseamsanth.tk",
