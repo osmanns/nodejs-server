@@ -5,14 +5,6 @@ const cors = require('cors');
 var host = process.env.HOST || '0.0.0.0';
 var port = process.env.PORT || 8080
 
-// app.use((req, res, next) => {
-//     res.header('Access-Control-Allow-Origin', 'https://foodchoiceserver.herokuapp.com');
-//     res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
-//     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-//     res.header('Access-Control-Allow-Credentials', true); 
-//     next();
-// });
-
 // const corsOptions ={
 //     origin: 'https://foodchoiceserver.herokuapp.com', 
 //     credentials: true,            //access-control-allow-credentials:true
@@ -20,16 +12,13 @@ var port = process.env.PORT || 8080
 // }
 // app.use(cors(corsOptions));
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
-  res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.header('Access-Control-Allow-Credentials', true); 
-  next();
-});
-
-app.use(cors());
-app.use(express.json());
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+//   res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   res.header('Access-Control-Allow-Credentials', true); 
+//   next();
+// });
 
 // app.use(function(req, res, next) {  
 //     res.header('Access-Control-Allow-Origin', req.headers.origin);
@@ -37,37 +26,18 @@ app.use(express.json());
 //     next();
 // });  
 
+app.use(cors());
+app.use(express.json());
+
+
+
 const db = mysql.createConnection({
     host: "foodch.kaseamsanth.tk",
     user: "plan",
     password: "Koo112234#",
     database: "fooddb",
     port: 3306,
-
-    // host: "localhost",
-    // user: "root",
-    // password: "",
-    // database: "fooddb",
 })
-
-
-
-// app.use(function(req, res, next) {
-//     res.header('Access-Control-Allow-Origin', '*');
-//     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE'); // If needed
-//     res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-type');
-//     res.header('Access-Control-Allow-Credentials', true); 
-//     next();
-// });
-
-
-// app.use(function (req, res, next) {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS");
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//     res.header("Access-Control-Allow-Credentials", true); 
-//     next();
-// });
 
 app.get('/', (req, res) => {
     res.send("Hello World")
@@ -92,6 +62,7 @@ app.get('/foodgroup', (req, res) => {
         }
     })
 })
+
 app.get('/foodgroupsub/', (req, res) => {
     db.query("SELECT * FROM food_group_sub", (err, result) => {
         if(err){
@@ -101,6 +72,7 @@ app.get('/foodgroupsub/', (req, res) => {
         }
     })
 })
+
 app.get('/foodgroupsub/:group_id', (req, res) => {
     db.query("SELECT * FROM food_group_sub WHERE group_id=?", [req.params.group_id], (err, result) => {
         if(err){
@@ -110,6 +82,7 @@ app.get('/foodgroupsub/:group_id', (req, res) => {
         }
     })
 })
+
 app.get('/packageunit', (req, res) => {
     db.query("SELECT * FROM package_unit", (err, result) => {
         if(err){
@@ -119,6 +92,7 @@ app.get('/packageunit', (req, res) => {
         }
     })
 })
+
 app.get('/packageperunit', (req, res) => {
     db.query("SELECT * FROM package_per_unit", (err, result) => {
         if(err){
@@ -128,6 +102,7 @@ app.get('/packageperunit', (req, res) => {
         }
     })
 })
+
 app.get('/weightunit/:weight_unit_id', (req, res) => {
     db.query("SELECT * FROM weight_unit  WHERE weight_unit_id=?", [req.params.weight_unit_id], (err, result) => {
         if(err){
