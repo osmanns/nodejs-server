@@ -19,18 +19,16 @@ app.get('/', (req, res) => {
 })
 
 app.get('/foodgroup', (req, res) => {
-    res.send(importFoodgroup)
-    // db.query("SELECT * FROM food_group", (err, result) => {
-    //     if(err){
-    //         console.log(err);
-    //     }else{
-    //         res.send(result);
-    //     }
-    // })
+    db.query("SELECT * FROM food_group", (err, result) => {
+        if(err){
+            console.log(err);
+        }else{
+            res.send(result);
+        }
+    })
 })
 
 app.get('/foodgroupsub', (req, res) => {
-
     db.query("SELECT * FROM food_group_sub", (err, result) => {
         if(err){
             console.log(err);
