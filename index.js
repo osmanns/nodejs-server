@@ -31,11 +31,6 @@ const db = mysql.createConnection({
     password: "Koo112234#",
     database: "fooddb",
     port: 3306,
-
-    // host: "localhost",
-    // user: "root",
-    // password: "",
-    // database: "fooddb",
 })
 
 app.get('/', (req, res) => {
