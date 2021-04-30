@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
     res.send("Hello World")
 })
 
-app.get('/api/foodgroup', (req, res) => {
+app.get('/foodgroup', (req, res) => {
     db.query("SELECT * FROM food_group", (err, result) => {
         if(err){
             console.log(err);
@@ -28,7 +28,7 @@ app.get('/api/foodgroup', (req, res) => {
     })
 })
 
-app.get('/api/foodgroupsub', (req, res) => {
+app.get('/foodgroupsub', (req, res) => {
 
     db.query("SELECT * FROM food_group_sub", (err, result) => {
         if(err){
@@ -39,7 +39,7 @@ app.get('/api/foodgroupsub', (req, res) => {
     })
 })
 
-app.get('/api/foodgroupsub/:group_id', (req, res) => {
+app.get('/foodgroupsub/:group_id', (req, res) => {
     db.query("SELECT * FROM food_group_sub WHERE group_id=?", [req.params.group_id], (err, result) => {
         if(err){
             console.log(err);
@@ -49,7 +49,7 @@ app.get('/api/foodgroupsub/:group_id', (req, res) => {
     })
 })
 
-app.get('/api/packageunit', (req, res) => {
+app.get('/packageunit', (req, res) => {
     db.query("SELECT * FROM package_unit", (err, result) => {
         if(err){
             console.log(err);
@@ -59,7 +59,7 @@ app.get('/api/packageunit', (req, res) => {
     })
 })
 
-app.get('/api/packageperunit', (req, res) => {
+app.get('/packageperunit', (req, res) => {
     db.query("SELECT * FROM package_per_unit", (err, result) => {
         if(err){
             console.log(err);
@@ -69,7 +69,7 @@ app.get('/api/packageperunit', (req, res) => {
     })
 })
 
-app.get('/api/weightunit/:weight_unit_id', (req, res) => {
+app.get('/weightunit/:weight_unit_id', (req, res) => {
     db.query("SELECT * FROM weight_unit  WHERE weight_unit_id=?", [req.params.weight_unit_id], (err, result) => {
         if(err){
             console.log(err);
@@ -79,7 +79,7 @@ app.get('/api/weightunit/:weight_unit_id', (req, res) => {
     })
 })
 
-app.post('/api/add', (req, res) => {
+app.post('/add', (req, res) => {
     const name_th = req.body.name_th;
     const name_en = req.body.name_en;
     const foodGroupId = req.body.foodGroupId;
