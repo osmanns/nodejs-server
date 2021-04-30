@@ -13,9 +13,6 @@ var port = process.env.PORT || 8080
 //     res.header('Access-Control-Allow-Credentials', true); 
 // });
 
-app.use(cors());
-app.use(express.json());
-
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -23,26 +20,24 @@ app.use(function(req, res, next) {
     next();
 });
 
+app.use(cors());
+app.use(express.json());
+
 const db = mysql.createConnection({
     host: "foodch.kaseamsanth.tk",
     user: "plan",
     password: "Koo112234#",
     database: "fooddb",
     port: 3306,
+
+    // host: "localhost",
+    // user: "root",
+    // password: "",
+    // database: "fooddb",
 })
 
 app.get('/', (req, res) => {
     res.send("Hello World")
-})
-
-app.get('/product', (req, res) => {
-    db.query("SELECT * FROM product_100", (err, result) => {
-        if(err){
-            console.log(err);
-        }else{
-            res.send(result);
-        }
-    })
 })
 
 app.get('/foodgroup', (req, res) => {
