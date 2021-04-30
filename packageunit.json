@@ -1,0 +1,21 @@
+[
+    {"id":1,"package_name":"กระป๋อง"},
+    {"id":2,"package_name":"กล่อง"},
+    {"id":3,"package_name":"แก้ว"},
+    {"id":4,"package_name":"ขวด"},
+    {"id":5,"package_name":"ชิ้น"},
+    {"id":6,"package_name":"ซอง"},
+    {"id":7,"package_name":"ถ้วย"},
+    {"id":8,"package_name":"ถาด"},
+    {"id":9,"package_name":"ถุง"},
+    {"id":10,"package_name":"แท่ง"},
+    {"id":11,"package_name":"แผ่น"},
+    {"id":12,"package_name":"แพ็ค"},
+    {"id":13,"package_name":"เม็ด"},
+    {"id":14,"package_name":"ห่อ"},
+    {"id":15,"package_name":"หลอด"},
+    {"id":16,"package_name":"กระปุก"},
+    {"id":17,"package_name":"ช้อนโต๊ะ"},
+    {"id":18,"package_name":"ช้อนชา"},
+    {"id":19,"package_name":"ปี๊ป"}
+]

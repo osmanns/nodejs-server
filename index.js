@@ -1,41 +1,24 @@
-const express = require('express');
+const express = require("express");
+const cors = require("cors");
+const db = require("./config/db")
 const app = express();
-const mysql = require('mysql');
-const cors = require('cors');
-var host = process.env.HOST || '0.0.0.0';
-var port = process.env.PORT || 8080
 
-// app.use(function(req, res, next) {
-//     next();
-//     res.header("Access-Control-Allow-Origin", "https://foodchoicenodejs.herokuapp.com"); // update to match the domain you will make the request from
-//     res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//     res.header('Access-Control-Allow-Credentials', true); 
-// });
+var HOST = process.env.HOST || '0.0.0.0';
+var PORT = 8080
 
-// app.use(function(req, res, next) {
-//     res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//     res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
-//     next();
-// });
+const importFoodgroup = require("./foodgroup.json")
+const importFoodgroupsub = require("./foodgroupsub.json")
+const importPackageunit = require("./packageunit.json")
+const importPackageperunit = require("./packageperunit.json")
 
 app.use(cors());
 app.use(express.json());
-
-const db = mysql.createConnection({
-    host: "foodch.kaseamsanth.tk",
-    user: "plan",
-    password: "Koo112234#",
-    database: "fooddb",
-    port: 3306,
-})
 
 app.get('/', (req, res) => {
     res.send("Hello World")
 })
 
-app.get('/foodgroup', (req, res) => {
+app.get('/api/foodgroup', (req, res) => {
     db.query("SELECT * FROM food_group", (err, result) => {
         if(err){
             console.log(err);
@@ -45,7 +28,8 @@ app.get('/foodgroup', (req, res) => {
     })
 })
 
-app.get('/foodgroupsub', (req, res) => {
+app.get('/api/foodgroupsub', (req, res) => {
+
     db.query("SELECT * FROM food_group_sub", (err, result) => {
         if(err){
             console.log(err);
@@ -55,7 +39,7 @@ app.get('/foodgroupsub', (req, res) => {
     })
 })
 
-app.get('/foodgroupsub/:group_id', (req, res) => {
+app.get('/api/foodgroupsub/:group_id', (req, res) => {
     db.query("SELECT * FROM food_group_sub WHERE group_id=?", [req.params.group_id], (err, result) => {
         if(err){
             console.log(err);
@@ -65,7 +49,7 @@ app.get('/foodgroupsub/:group_id', (req, res) => {
     })
 })
 
-app.get('/packageunit', (req, res) => {
+app.get('/api/packageunit', (req, res) => {
     db.query("SELECT * FROM package_unit", (err, result) => {
         if(err){
             console.log(err);
@@ -75,7 +59,7 @@ app.get('/packageunit', (req, res) => {
     })
 })
 
-app.get('/packageperunit', (req, res) => {
+app.get('/api/packageperunit', (req, res) => {
     db.query("SELECT * FROM package_per_unit", (err, result) => {
         if(err){
             console.log(err);
@@ -85,7 +69,7 @@ app.get('/packageperunit', (req, res) => {
     })
 })
 
-app.get('/weightunit/:weight_unit_id', (req, res) => {
+app.get('/api/weightunit/:weight_unit_id', (req, res) => {
     db.query("SELECT * FROM weight_unit  WHERE weight_unit_id=?", [req.params.weight_unit_id], (err, result) => {
         if(err){
             console.log(err);
@@ -95,7 +79,7 @@ app.get('/weightunit/:weight_unit_id', (req, res) => {
     })
 })
 
-app.post('/add', (req, res) => {
+app.post('/api/add', (req, res) => {
     const name_th = req.body.name_th;
     const name_en = req.body.name_en;
     const foodGroupId = req.body.foodGroupId;
@@ -136,6 +120,21 @@ app.post('/add', (req, res) => {
     );
 })
 
-app.listen(port, () => {
-    console.log(`Server is running on port . ${port}`)
+app.listen(process.env.PORT || PORT, () => {
+    console.log(`Server is running on port . ${PORT}`)
 })
+
+// app.use(function(req, res, next) {
+//     next();
+//     res.header("Access-Control-Allow-Origin", "https://foodchoicenodejs.herokuapp.com"); // update to match the domain you will make the request from
+//     res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     res.header('Access-Control-Allow-Credentials', true); 
+// });
+
+// app.use(function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
+//     next();
+// });

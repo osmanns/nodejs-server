@@ -1,0 +1,9 @@
+[
+    {"id":1,"group_id":1,"group_name":"กลุ่มนมและผลิตภัณฑ์ (Dairy products)"},
+    {"id":2,"group_id":2,"group_name":"กลุ่มเครื่องดื่ม (พร้อมดื่ม) (Beverages)"},
+    {"id":3,"group_id":3,"group_name":"กลุ่มอาหารขบเคี้ยวและขนมหวาน (Snack food and desserts)"},
+    {"id":4,"group_id":4,"group_name":"กลุ่มอาหารกึ่งสำเร็จรูป (Semi-processed foods)"},
+    {"id":5,"group_id":5,"group_name":"กลุ่มผลิตภัณฑ์ขนมอบ (Bakery products)"},
+    {"id":6,"group_id":6,"group_name":"กลุ่มธัญพืชและผลิตภัณฑ์ (Cereal and grain products)"},
+    {"id":7,"group_id":7,"group_name":"กลุ่มอื่น ๆ (Miscellaneous)"}
+]
