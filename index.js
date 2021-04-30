@@ -36,11 +36,11 @@ const db = mysql.createConnection({
     // database: "fooddb",
 })
 
-app.get('/', (req, res) => {
+app.GET('/', (req, res) => {
     res.send("Hello World")
 })
 
-app.get('/foodgroup', (req, res) => {
+app.GET('/foodgroup', (req, res) => {
     db.query("SELECT * FROM food_group", (err, result) => {
         if(err){
             console.log(err);
@@ -50,7 +50,7 @@ app.get('/foodgroup', (req, res) => {
     })
 })
 
-app.get('/foodgroupsub/', (req, res) => {
+app.GET('/foodgroupsub/', (req, res) => {
     db.query("SELECT * FROM food_group_sub", (err, result) => {
         if(err){
             console.log(err);
@@ -60,7 +60,7 @@ app.get('/foodgroupsub/', (req, res) => {
     })
 })
 
-app.get('/foodgroupsub/:group_id', (req, res) => {
+app.GET('/foodgroupsub/:group_id', (req, res) => {
     db.query("SELECT * FROM food_group_sub WHERE group_id=?", [req.params.group_id], (err, result) => {
         if(err){
             console.log(err);
@@ -70,7 +70,7 @@ app.get('/foodgroupsub/:group_id', (req, res) => {
     })
 })
 
-app.get('/packageunit', (req, res) => {
+app.GET('/packageunit', (req, res) => {
     db.query("SELECT * FROM package_unit", (err, result) => {
         if(err){
             console.log(err);
@@ -80,7 +80,7 @@ app.get('/packageunit', (req, res) => {
     })
 })
 
-app.get('/packageperunit', (req, res) => {
+app.GET('/packageperunit', (req, res) => {
     db.query("SELECT * FROM package_per_unit", (err, result) => {
         if(err){
             console.log(err);
@@ -90,7 +90,7 @@ app.get('/packageperunit', (req, res) => {
     })
 })
 
-app.get('/weightunit/:weight_unit_id', (req, res) => {
+app.GET('/weightunit/:weight_unit_id', (req, res) => {
     db.query("SELECT * FROM weight_unit  WHERE weight_unit_id=?", [req.params.weight_unit_id], (err, result) => {
         if(err){
             console.log(err);
