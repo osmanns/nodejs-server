@@ -21,11 +21,11 @@ const db = mysql.createConnection({
     user: "plan",
     password: "Koo112234#",
     database: "fooddb",
-    // port: 3306,
+    port: 3306,
 })
 
 app.get('/', (req, res) => {
-    res.send("Hello")
+    res.send("Hello World")
 })
 
 app.get('/product', (req, res) => {
